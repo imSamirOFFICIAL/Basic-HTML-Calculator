@@ -1,0 +1,111 @@
+<html>
+
+<head>
+    <title>Calculator</title>
+    <style>
+        .calculator {
+            margin: 100px;
+            height: 375px;
+            width: 250px;
+            border: 1px solid black;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #888888;
+            background: linear-gradient(to bottom, #1BFFFF 0%, #393db3 100%);
+        }
+        .calculator input[type="text"] {
+            font-size: 25px;
+            text-align: left;
+            width: 190px;
+            overflow: hidden;
+        }
+        .calculator button {
+            width: 40px;
+            height: 40px;
+            margin: 3px;
+            font-size: 25px;
+            border-radius: 5px;
+            border: none;
+            background-color: #c12aa5;
+            color: white;
+        }
+        .calculator button:hover {
+            background-color: #d834ba;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="calculator">
+            <p><input style="width:190px" type="text" id="Display" value="" /></p>
+            <p>
+                <button id="1" onclick="calculate('1')">1</button>
+                <button id="2" onclick="calculate('2')">2</button>
+                <button id="3" onclick="calculate('3')">3</button>
+                <button id="4" onclick="calculate('4')">4</button>
+            </p>
+            <p>
+                <button id="5" onclick="calculate('5')">5</button>
+                <button id="6" onclick="calculate('6')">6</button>
+                <button id="7" onclick="calculate('7')">7</button>
+                <button id="8" onclick="calculate('8')">8</button>
+            </p>
+            <p>
+                <button id="9" onclick="calculate('9')">9</button>
+                <button id="0" onclick="calculate('0')">0</button>
+                <button id="." onclick="calculate('.')">.</button>
+                <button id="c" onclick="calculate('c')">C</button>
+            </p>
+            <p>
+                <button id="+" onclick="calculate('+')">+</button>
+                <button id="-" onclick="calculate('-')">-</button>
+                <button id="*" onclick="calculate('*')">x</button>
+                <button id="/" onclick="calculate('/')">÷</button>
+            </p>
+            <p>
+                <button id="backspace" onclick="backspace()">←</button>
+                <button style="width:140px" id="=" onclick="calculate('=')">=</button>
+            </p>
+        </div>
+
+        <script>
+            var lastButtonWasEquals = false;
+            function calculate(number) {
+                initialValue = 0;
+                if (number == "c") {
+                    document.getElementById("Display").value = "";
+                    lastButtonWasEquals = false;
+                } else if (number != 'c' && number != '=') {
+                    if (lastButtonWasEquals && !isNaN(number)) {
+                        document.getElementById("Display").value = "";
+                    }
+                    if (number == '*') {
+                        number = 'x';
+                    } else if (number == '/') {
+                        number = '÷';
+                    }
+                    document.getElementById("Display").value += number;
+                    lastButtonWasEquals = false;
+                    var displayElement = document.getElementById("Display");
+                    displayElement.scrollLeft = displayElement.scrollWidth;
+                } else {
+                    calculateString = document.getElementById("Display").value;
+                    calculateString = calculateString.replace(/x/g, '*');
+                    calculateString = calculateString.replace(/÷/g, '/');
+                    initialValue = eval(calculateString);
+                    if (initialValue % 1 != 0) {
+                        initialValue = initialValue.toFixed(2);
+                    }
+                    document.getElementById("Display").value = initialValue;
+                    lastButtonWasEquals = true;
+                }
+            }
+            function backspace() {
+                var displayValue = document.getElementById("Display").value;
+                document.getElementById("Display").value = displayValue.slice(0, -1);
+            }
+        </script>
+    </center>
+</body>
+
+</html>
