@@ -1,10 +1,18 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+
     <style>
         .calculator {
-            margin: 100px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             height: 375px;
             width: 250px;
             border: 1px solid black;
@@ -15,7 +23,7 @@
         .calculator input[type="text"] {
             font-size: 25px;
             text-align: left;
-            width: 190px;
+            width: 182px;
             overflow: hidden;
         }
         .calculator button {
@@ -37,7 +45,7 @@
 <body>
     <center>
         <div class="calculator">
-            <p><input style="width:190px" type="text" id="Display" value="" /></p>
+            <p><input style="width:182px" type="text" id="Display" value="" /></p>
             <p>
                 <button id="1" onclick="calculate('1')">1</button>
                 <button id="2" onclick="calculate('2')">2</button>
